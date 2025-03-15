@@ -1,0 +1,134 @@
+# PyCharm Setup Instructions
+
+This document provides instructions for setting up the AI Services Aggregator project in PyCharm.
+
+## Project Setup
+
+1. **Open the Project in PyCharm:**
+   - Launch PyCharm
+   - Choose "Open" and navigate to your project directory
+   - Select the root folder of the project and click "Open"
+
+2. **Configure Python Interpreter:**
+   - Go to File > Settings (or PyCharm > Preferences on macOS)
+   - Navigate to Project: ai-services-aggregator > Python Interpreter
+   - Click the gear icon and select "Add"
+   - Choose "Virtualenv Environment" > "New environment"
+   - Set the location (usually within your project directory) and base interpreter
+   - Click "OK"
+
+## Debugging Setup
+
+Configure debugging for both backend and frontend components:
+
+1. **Backend Debugging:**
+   - In your Flask run configuration, ensure that "FLASK_DEBUG=1" is in the environment variables
+   - Set breakpoints in your Python code by clicking in the gutter next to the line numbers
+   - Start the Flask application in debug mode by clicking the bug icon instead of the run icon
+   - When a breakpoint is hit, the debugger will pause execution
+
+2. **Frontend Debugging:**
+   - PyCharm Professional provides JavaScript debugging capabilities
+   - In Chrome, install the JetBrains IDE Support extension
+   - In your Next.js run configuration, check "Debug" and set the browser
+   - Set breakpoints in your TypeScript/JavaScript files
+   - Start the Next.js application in debug mode
+
+## Database Integration
+
+Set up database connections within PyCharm:
+
+1. **PostgreSQL Integration:**
+   - Go to View > Tool Windows > Database
+   - Click the "+" button and select "Data Source" > "PostgreSQL"
+   - Enter the connection details:
+     - Host: localhost (or postgres if using Docker)
+     - Port: 5432
+     - Database: ai_aggregator
+     - User: postgres
+     - Password: postgres
+   - Test the connection and click "OK"
+
+2. **MongoDB Integration:**
+   - Go to View > Tool Windows > Database
+   - Click the "+" button and select "Data Source" > "MongoDB"
+   - Enter the connection details:
+     - Host: localhost (or mongodb if using Docker)
+     - Port: 27017
+     - Database: ai_aggregator
+   - Test the connection and click "OK"
+
+## Git Integration
+
+PyCharm has excellent Git integration:
+
+1. **Git Setup:**
+   - Go to VCS > Git > Remotes
+   - Add your GitHub repository URL
+   - Use the Git tool window (Alt+9) to manage version control
+
+2. **Common Git Operations:**
+   - Commit changes: Ctrl+K (Cmd+K on macOS)
+   - Push commits: Ctrl+Shift+K (Cmd+Shift+K on macOS)
+   - Pull changes: VCS > Git > Pull
+   - Create branch: VCS > Git > Branches > New Branch
+
+## Code Style and Quality
+
+Configure code style settings for consistency:
+
+1. **Python Code Style:**
+   - Go to File > Settings > Editor > Code Style > Python
+   - Set the desired code style (PEP 8 is recommended)
+   - Configure auto-formatting options
+
+2. **TypeScript/JavaScript Code Style:**
+   - Go to File > Settings > Editor > Code Style > TypeScript/JavaScript
+   - Configure according to your preferred style (standard/prettier)
+
+3. **Code Quality Tools:**
+   - Enable Pylint, ESLint, or other linting tools
+   - Go to File > Settings > Python Integrated Tools to configure Python tools
+   - Go to File > Settings > Languages & Frameworks > JavaScript > Code Quality Tools for JavaScript tools to create the virtual environment
+
+3. **Install Dependencies:**
+   - Open the terminal in PyCharm (View > Tool Windows > Terminal)
+   - Navigate to the backend directory: `cd backend`
+   - Install the required packages: `pip install -r requirements.txt`
+
+## Docker Integration
+
+PyCharm Professional includes Docker integration, which is helpful for this project:
+
+1. **Enable Docker Integration:**
+   - Go to File > Settings (or PyCharm > Preferences on macOS)
+   - Navigate to Build, Execution, Deployment > Docker
+   - Click the "+" button to add a Docker configuration
+   - Select the appropriate connection type and click "OK"
+
+2. **Configure Docker Compose:**
+   - Right-click on the `docker-compose.yml` file
+   - Select "Run 'docker-compose.yml up'"
+   - This will start the Docker containers
+
+## Run Configurations
+
+Set up run configurations for different parts of the application:
+
+1. **Backend Flask Application:**
+   - Go to Run > Edit Configurations
+   - Click the "+" button and select "Python"
+   - Set the name: "Flask Backend"
+   - Script path: Select the `wsgi.py` file in the backend directory
+   - Working directory: Set to the backend directory
+   - Environment variables: Add `FLASK_APP=wsgi.py;FLASK_DEBUG=1` and any other required variables
+   - Click "OK"
+
+2. **Frontend Next.js Application:**
+   - Go to Run > Edit Configurations
+   - Click the "+" button and select "npm"
+   - Set the name: "Next.js Frontend"
+   - Package.json: Select the package.json file in the frontend directory
+   - Command: "run"
+   - Scripts: "dev"
+   - Click "OK"
