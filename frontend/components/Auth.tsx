@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { registerUser } from '../services/api';
 
 export const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -33,7 +34,7 @@ export const LoginForm: React.FC = () => {
       } else {
         router.push('/chat');
       }
-    } catch (err) {
+    } catch (err: any) {
       setError('An error occurred. Please try again.');
       console.error(err);
     } finally {
@@ -130,23 +131,12 @@ export const SignupForm: React.FC = () => {
     setError('');
 
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
+      // Register the user
+      await registerUser({
+        name,
+        email,
+        password,
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong');
-      }
 
       // Automatically sign in after successful registration
       const result = await signIn('credentials', {

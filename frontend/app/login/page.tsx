@@ -2,7 +2,7 @@ import { LoginForm } from '../../components/Auth';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Login - AI Services Aggregator',
   description: 'Login to your account',
 };

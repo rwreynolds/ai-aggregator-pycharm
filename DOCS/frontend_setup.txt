@@ -1,0 +1,182 @@
+# AI Services Aggregator Setup Guide
+
+This guide will help you set up the AI Services Aggregator application. The app allows users to access multiple AI services and models through a single conversation interface.
+
+## Prerequisites
+
+- Docker and Docker Compose
+- Node.js 18+ (for local development)
+- Python 3.10+ (for local development)
+- PostgreSQL (for local development)
+- MongoDB (for local development)
+- API keys for the AI services you want to use (OpenAI, Anthropic, etc.)
+
+## Installation Options
+
+You can set up the application either using Docker (recommended) or by running the services locally.
+
+### Option 1: Docker Setup (Recommended)
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-username/ai-services-aggregator.git
+   cd ai-services-aggregator
+   ```
+
+2. **Configure environment variables**:
+   - Copy the `.env.example` file to `.env`
+   - Update the values in `.env` with your API keys and settings
+   ```bash
+   cp .env.example .env
+   nano .env  # Edit the file with your preferred editor
+   ```
+
+3. **Build and start the Docker containers**:
+   ```bash
+   docker-compose up -d
+   ```
+
+4. **Access the application**:
+   - Frontend: http://localhost
+   - Backend API: http://localhost/api
+
+### Option 2: Local Development Setup
+
+#### Backend Setup
+
+1. **Navigate to the backend directory**:
+   ```bash
+   cd backend
+   ```
+
+2. **Create and activate a virtual environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configure environment variables**:
+   ```bash
+   cp ../.env.example .env
+   # Edit .env with your preferred editor
+   ```
+
+5. **Run the Flask application**:
+   ```bash
+   python wsgi.py
+   ```
+
+#### Frontend Setup
+
+1. **Navigate to the frontend directory**:
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**:
+   ```bash
+   cp ../.env.example .env.local
+   # Edit .env.local with your preferred editor
+   ```
+
+4. **Run the Next.js development server**:
+   ```bash
+   npm run dev
+   ```
+
+5. **Access the frontend**:
+   - Frontend: http://localhost:3000
+
+## PyCharm Setup
+
+If you're using PyCharm for development:
+
+1. **Open the project in PyCharm**:
+   - Open PyCharm
+   - Choose "Open" and navigate to the project directory
+
+2. **Configure Python Interpreter**:
+   - Go to File > Settings (or PyCharm > Preferences on macOS)
+   - Navigate to Project: ai-services-aggregator > Python Interpreter
+   - Click the gear icon and select "Add"
+   - Create a new virtual environment in the project directory
+
+3. **Set up the run configurations**:
+   - **For the backend**:
+     - Create a new Python configuration
+     - Script path: Set to `backend/wsgi.py`
+     - Working directory: Set to the `backend` directory
+     - Environment variables: Add `FLASK_APP=wsgi.py;FLASK_DEBUG=1`
+
+   - **For the frontend**:
+     - Create a new npm configuration
+     - Package.json: Select the package.json file in the frontend directory
+     - Command: "run"
+     - Scripts: "dev"
+
+## Database Setup
+
+### PostgreSQL Setup
+
+1. **Local Setup**:
+   ```bash
+   # Create the database
+   createdb ai_aggregator
+
+   # Or using psql
+   psql -U postgres
+   CREATE DATABASE ai_aggregator;
+   ```
+
+2. **Update the DATABASE_URL in your .env file**:
+   ```
+   DATABASE_URL=postgresql://username:password@localhost:5432/ai_aggregator
+   ```
+
+### MongoDB Setup
+
+1. **Local Setup**:
+   MongoDB will create the necessary collections automatically.
+
+2. **Update the MONGODB_URI in your .env file**:
+   ```
+   MONGODB_URI=mongodb://localhost:27017/
+   ```
+
+## API Keys
+
+You'll need to obtain API keys for the AI services you want to use:
+
+1. **OpenAI API**:
+   - Sign up at https://platform.openai.com/
+   - Create an API key and add it to your .env file as `OPENAI_API_KEY`
+
+2. **Anthropic Claude API**:
+   - Sign up at https://www.anthropic.com/
+   - Get an API key and add it to your .env file as `ANTHROPIC_API_KEY`
+
+3. **Grok API (if available)**:
+   - Obtain an API key and add it to your .env file as `GROK_API_KEY`
+
+## Next Steps
+
+- Create a user account on the signup page
+- Explore the different AI services and models
+- Adjust settings like temperature and max tokens
+- Start chatting with various AI models in a single thread
+
+## Troubleshooting
+
+- If you encounter database connection issues, ensure your PostgreSQL and MongoDB servers are running and the connection URLs are correct
+- For API-related errors, verify that your API keys are valid
+- Check the logs in the Docker containers using `docker-compose logs service_name`

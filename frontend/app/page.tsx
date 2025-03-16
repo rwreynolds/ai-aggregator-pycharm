@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'AI Services Aggregator - Home',
   description: 'Access multiple AI services in one unified interface',
 };
@@ -16,8 +15,8 @@ export default function Home() {
             <Link href="/login" className="text-blue-600 hover:text-blue-800">
               Login
             </Link>
-            <Link 
-              href="/signup" 
+            <Link
+              href="/signup"
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             >
               Sign Up
@@ -32,11 +31,11 @@ export default function Home() {
             One Platform, Multiple AI Services
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Access OpenAI, Claude, Grok, and other AI models in a single, 
+            Access OpenAI, Claude, Grok, and other AI models in a single,
             unified conversation thread. Switch between services seamlessly
             and maintain context across models.
           </p>
-          
+
           <div className="flex justify-center gap-4">
             <Link
               href="/signup"
@@ -45,7 +44,7 @@ export default function Home() {
               Get Started
             </Link>
             <Link
-              href="/about"
+              href="#features"
               className="bg-white text-blue-600 border border-blue-600 px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-50"
             >
               Learn More
@@ -53,7 +52,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-20 grid md:grid-cols-3 gap-8">
+        <div id="features" className="mt-20 grid md:grid-cols-3 gap-8">
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-3">Multiple AI Services</h3>
             <p className="text-gray-600">

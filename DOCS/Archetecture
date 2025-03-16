@@ -1,0 +1,41 @@
+graph TD
+    Client[User Browser] --> Nginx[Nginx]
+
+    subgraph "Frontend - Next.js"
+        Nginx --> FE[Next.js Frontend]
+        FE --> Auth[NextAuth.js]
+        FE --> Components[React Components]
+        FE --> ApiService[API Service Layer]
+    end
+
+    ApiService --> BE[Flask Backend API]
+
+    subgraph "Backend - Flask"
+        BE --> AuthRoutes[Auth Routes]
+        BE --> ChatRoutes[Chat Routes]
+        BE --> SettingsRoutes[Settings Routes]
+
+        AuthRoutes --> JWT[JWT Authentication]
+
+        ChatRoutes --> OpenAI[OpenAI Service]
+        ChatRoutes --> Claude[Claude Service]
+        ChatRoutes --> Grok[Grok Service]
+
+        JWT --> UserModel[User Model]
+        SettingsRoutes --> UserSettings[User Settings Model]
+        ChatRoutes --> MessageModel[Message Model]
+        ChatRoutes --> ThreadModel[Thread Model]
+    end
+
+    subgraph "Databases"
+        UserModel --> Postgres[(PostgreSQL)]
+        UserSettings --> Postgres
+        MessageModel --> MongoDB[(MongoDB)]
+        ThreadModel --> MongoDB
+    end
+
+    subgraph "External AI Services"
+        OpenAI --> OpenAIAPI[OpenAI API]
+        Claude --> ClaudeAPI[Anthropic API]
+        Grok --> GrokAPI[Grok API]
+    end

@@ -1,10 +1,11 @@
 import { Message, Thread, UserSettings, ServiceMap, Assistant, ChatRequest } from '../types';
+import { getSession } from 'next-auth/react';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 // Helper for making authenticated API requests
-async function fetchWithAuth(endpoint: string, options: RequestInit = {}) {
-  const session = await import('next-auth/react').then(mod => mod.getSession());
+export async function fetchWithAuth(endpoint: string, options: RequestInit = {}) {
+  const session = await getSession();
 
   if (!session) {
     throw new Error('No active session');
@@ -68,4 +69,20 @@ export async function sendMessage(request: ChatRequest): Promise<Message> {
 // Threads
 export async function fetchThreads(): Promise<Thread[]> {
   return fetchWithAuth('/threads');
+}
+
+// Auth methods (for direct API calls)
+export async function registerUser(userData: { name: string, email: string, password: string }) {
+  const response = await fetch(`${API_URL}/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Registration failed');
+  }
+
+  return response.json();
 }

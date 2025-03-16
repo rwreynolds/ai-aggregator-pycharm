@@ -1,0 +1,15 @@
+ai-aggregator/
+├── backend/                 # Flask API
+│   ├── app/                 # Flask application
+│   ├── Dockerfile           # Container setup for Flask
+│   └── requirements.txt     # Python dependencies
+├── frontend/                # Next.js frontend
+│   ├── app/                 # Next.js App Router
+│   ├── components/          # React components
+│   ├── services/            # API services
+│   ├── types/               # TypeScript type definitions
+│   └── Dockerfile           # Container setup for Next.js
+├── docker/                  # Docker configuration files
+│   ├── nginx/               # Nginx configuration
+│   └── docker-compose.yml   # Multi-container Docker setup
+└── .env                     # Environment variables

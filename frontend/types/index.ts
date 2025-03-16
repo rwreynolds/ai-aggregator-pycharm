@@ -73,7 +73,7 @@ export interface SettingsUpdateRequest {
     model?: string;
     temperature?: number;
     max_tokens?: number;
-    assistant_id?: string;
-    service_thread_id?: string;
-    session_thread_id?: string;
-}# TODO: Implement index.ts
+    assistant_id?: string | null;
+    service_thread_id?: string | null;
+    session_thread_id?: string | null;
+}

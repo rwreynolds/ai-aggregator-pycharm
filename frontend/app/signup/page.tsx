@@ -2,7 +2,7 @@ import { SignupForm } from '../../components/Auth';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Sign Up - AI Services Aggregator',
   description: 'Create a new account',
 };
