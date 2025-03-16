@@ -16,7 +16,8 @@ def create_app():
     CORS(app)
 
     # Configure PostgreSQL
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql://postgres:postgres@postgres:5432/ai_aggregator')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://mrrobot@localhost:5432/ai_aggregator_dev'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql://postgres:postgres@postgres:5432/ai_aggregator')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key')
 
@@ -24,9 +25,9 @@ def create_app():
     db.init_app(app)
 
     # Register blueprints
-    from app.routes.auth import auth_bp
-    from app.routes.chat import chat_bp
-    from app.routes.settings import settings_bp
+    from .routes.auth import auth_bp
+    from .routes.chat import chat_bp
+    from .routes.settings import settings_bp
     
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(chat_bp, url_prefix='/api')

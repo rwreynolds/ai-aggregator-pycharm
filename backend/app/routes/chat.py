@@ -1,11 +1,11 @@
 from flask import Blueprint, request, jsonify
-from app import mongo_db
-from app.models.message import Message, Thread
-from app.models.user import UserSettings
-from app.routes.auth import token_required
-from app.services.openai import chat_completion, assistant_completion
-from app.services.claude import claude_completion
-from app.services.grok import grok_completion
+from .. import mongo_db
+from ..models.message import Message, Thread
+from ..models.user import UserSettings
+from .auth import token_required
+from ..services.openai import chat_completion, assistant_completion
+from ..services.claude import claude_completion
+from ..services.grok import grok_completion
 import uuid
 
 chat_bp = Blueprint('chat', __name__)
@@ -87,7 +87,7 @@ def chat(user_id):
         user_settings = UserSettings.query.filter_by(user_id=user_id).first()
         if user_settings:
             user_settings.session_thread_id = thread_id
-            from app import db
+            from .. import db
             db.session.commit()
     
     # Save user message to database
