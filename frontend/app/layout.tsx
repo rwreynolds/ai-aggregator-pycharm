@@ -1,14 +1,11 @@
+// app/layout.tsx
+"use client";
+
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { SessionProvider } from '../components/SessionProvider';
-import { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export const metadata: Metadata = {
-  title: 'AI Services Aggregator',
-  description: 'Access multiple AI services and models within a single conversation',
-};
 
 export default function RootLayout({
   children,
